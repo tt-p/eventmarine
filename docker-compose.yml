@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    environment:
+    - POSTGRES_USER=postgres
+    - POSTGRES_PASSWORD=postgres
+    - POSTGRES_DB=eventmarine-db
+    ports:
+      - "5432:5432"
+      
+  eventmarine:
+    image: eventmarine:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: eventmarine
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:8080"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+    restart: on-failure

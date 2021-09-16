@@ -1,0 +1,11 @@
+/.idea/
+
+/src/main/resources/qrcode/**
+
+/frontend/node_modules
+
+/target/
+
+/frontend/build/
+
+/frontend/node/
